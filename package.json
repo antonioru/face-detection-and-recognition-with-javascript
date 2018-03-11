@@ -1,0 +1,18 @@
+{
+  "name": "face-detection-and-recognition-with-javascript",
+  "version": "1.0.0",
+  "description": "A face recognition experiment with Node.js",
+  "main": "index.js",
+  "scripts": {
+    "start:client": "./node_modules/.bin/static ./client",
+    "start:detection": "node server/face-detection.js",
+    "start:recognition": "node server/face-recognition.js"
+  },
+  "author": "Antonio Russo @ Beautiful Interactions",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^3.5.1",
+    "node-static": "^0.7.10",
+    "opencv4nodejs": "^2.35.0"
+  }
+}

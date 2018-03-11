@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tracking.js Experiment</title>
+
+    <style>
+        body {
+            background: #F5F6F8;
+        }
+
+        .container {
+            background: white;
+            margin: 30px auto;
+            max-width: 960px;
+            padding: 20px;
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            border-radius: 20px;
+        }
+
+        .container h1 {
+            margin: 0 0 20px 0;
+            text-align: center;
+            font-size: 20px;
+            color: #383838;
+        }
+
+        .container hr {
+            border-top: 1px dashed #F5F6F8;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .container img {
+            max-width: 100%;
+            display: inline-block;
+            -webkit-box-shadow: 0 1px 2px 0 rgba(50, 50, 50, 0.5);
+            -moz-box-shadow: 0 1px 2px 0 rgba(50, 50, 50, 0.5);
+            box-shadow: 0 1px 2px 0 rgba(50, 50, 50, 0.5);
+        }
+
+        .container .rect {
+            position: absolute;
+            border: 3px solid #1ed36f;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+<div class="container" id="container">
+    <h1>Face detection experiment with
+        <a href="http://trackingjs.com" target="_parent">tracking.js</a></h1>
+    <hr />
+    <img src="face-detection.jpg" alt="Stranger Things" id="face-detection-image" />
+</div>
+<script src="bower_components/tracking/build/tracking-min.js"></script>
+<script src="bower_components/tracking/build/data/face-min.js"></script>
+<script src="bower_components/tracking/build/data/eye-min.js"></script>
+<script src="bower_components/tracking/build/data/mouth-min.js"></script>
+<script>
+  (function () {
+    'use strict';
+
+    var container = document.getElementById('container');
+    var img = document.getElementById('face-detection-image');
+
+    var drawRect = function (x, y, w, h) {
+      var rect = document.createElement('div');
+      rect.classList.add('rect');
+      rect.style.width = w + 'px';
+      rect.style.height = h + 'px';
+      rect.style.left = (img.offsetLeft + x) + 'px';
+      rect.style.top = (img.offsetTop + y) + 'px';
+
+      container.appendChild(rect);
+    };
+
+    window.onload = function () {
+      console.time('Face detection');
+
+      var tracker = new tracking.ObjectTracker(['face']);
+      tracker.setStepSize(.5);
+      tracking.track('#face-detection-image', tracker);
+      tracker.on('track', function (event) {
+        event.data.forEach(function (rect) {
+          drawRect(rect.x, rect.y, rect.width, rect.height);
+        });
+        console.timeEnd('Face detection');
+      });
+    };
+  })();
+</script>
+</body>
+</html>
