@@ -1,6 +1,6 @@
 # face-detection-and-recognition-with-javascript
-This repository is part of a series of studies and experiments on face detection &amp; recognition using javascript, related to an article released on Medium:
-
+This repository is part of a serie of studies and experiments on javascript face detection &amp; recognition. 
+All the results of this experiments are now published into [this article](https://blog.beautifulinteractions.com/face-detection-and-recognition-with-javascript-9e0b51b1c012)
 
 ## Requirements 
 
